@@ -1,1 +1,2 @@
-# GymSystem2
+Developed a robust gym management system with three user roles (Admin, Trainer, Member) using
+ASP.NET MVC and Oracle SQL Developer.Features include role-based access control, email notifications for subscriptions, testimonial approval workflow, and responsive UI design. Members can manage profiles, subscriptions, and download receipts, while trainers and admins have full CRUD functionality for plans, users, and website content.
