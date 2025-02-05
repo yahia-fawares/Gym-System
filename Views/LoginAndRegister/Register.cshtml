@@ -1,0 +1,79 @@
+﻿@model GymSystem2.Models.User
+
+@{
+    Layout = null;
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DGym | World</title>
+    <link href="~/HomeDesign/img/logo.png" rel="icon">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/LoginAndRegisterDesign/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/LoginAndRegisterDesign/css/style.css">
+</head>
+<body style="padding:0; margin:0;">
+
+    <div class="main" style="background-color:#7d390b;">
+
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up</h2>
+                        <form enctype="multipart/form-data" method="POST" asp-action="Register" class="register-form" id="register-form">
+                            <div class="form-group">
+                                <label asp-for="Profile.Fname"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="Profile.Fname" type="text" placeholder="Your First Name" />
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Profile.Lname"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="Profile.Lname" type="text" placeholder="Your Last Name" />
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Profile.ImageFile"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="Profile.ImageFile" type="file" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Email"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="Email" type="text" placeholder="Your Email" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="password" placeholder="Password" />
+                            </div>
+
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="~/HomeDesign/img/hero/hero-2.jpg" alt="sign in image"></figure>
+                        <a href="Login" class="signup-image-link">Not a member? Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JS -->
+    <script src="~/LoginAndRegisterDesign/vendor/jquery/jquery.min.js"></script>
+    <script src="~/LoginAndRegisterDesign/js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>

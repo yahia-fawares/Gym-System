@@ -1,0 +1,53 @@
+﻿@model IEnumerable<GymSystem2.Models.Plan>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/views/shared/TrainerLayout.cshtml";
+}
+<div style="margin-left:20px;margin-top:3px">
+
+
+<h1>My Plans</h1>
+
+<p>
+    <a asp-action="CreatePlans">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Planname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Planname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="EditPlans" asp-route-id="@item.Planid">Edit</a> |
+                    <a asp-action="DeletePlans" asp-route-id="@item.Planid">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>

@@ -1,0 +1,76 @@
+﻿@model GymSystem2.Models.User
+
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DGym | World</title>
+    <link href="~/HomeDesign/img/logo.png" rel="icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/LoginAndRegisterDesign/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/LoginAndRegisterDesign/css/style.css">
+</head>
+<body style="padding:0; margin:0;">
+
+    <div class="main" style="background-color:#7d390b;">
+
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign in</h2>
+
+                        <!-- Display error message -->
+                        @if (!string.IsNullOrEmpty(ViewBag.Error))
+                        {
+                            <div class="alert alert-danger" style="color:red">
+                                @ViewBag.Error
+                            </div>
+                        }
+
+                        <form method="POST" asp-action="Login" class="register-form" id="register-form">
+                            <div class="form-group">
+                                <label for="Email"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="Email" type="text" placeholder="Your Email" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="password" placeholder="Password" />
+                            </div>
+
+                            
+                            <div class="form-group form-button">
+                                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+                            </div>
+                       
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="~/HomeDesign/img/hero/hero-2.jpg" alt="sign in image"></figure>
+                        <a href="Register" class="signup-image-link">Not a member? Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JS -->
+    <script src="~/LoginAndRegisterDesign/vendor/jquery/jquery.min.js"></script>
+    <script src="~/LoginAndRegisterDesign/js/main.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,42 @@
+﻿@using System.Security.Claims
+
+@{
+    // استخراج RoleId من Claims
+    var roleIdClaim = User.Claims.FirstOrDefault(c => c.Type == "RoleId");
+    var Roleid = roleIdClaim != null ? int.Parse(roleIdClaim.Value) : 0; // القيمة الافتراضية 0 إذا لم يكن claim موجودًا
+
+    ViewData["Title"] = "MemberDashboard";
+    Layout = "~/Views/Shared/HomePage.cshtml";
+}
+
+<!-- Table Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Submit Your Feedback</h6>
+                <form asp-controller="Feedback" asp-action="SubmitFeedback" method="post">
+                    <div class="mb-3">
+                        <label for="MemberName" class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="MemberName" name="MemberName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="FeedbackContent" class="form-label">Feedback</label>
+                        <textarea class="form-control" id="FeedbackContent" name="FeedbackContent" rows="4" placeholder="Write your feedback here..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- زر Home -->
+        @if (Roleid == 3) 
+        {
+            <div class="col-sm-12 col-xl-6 d-flex justify-content-end align-items-start">
+                <a class="btn btn-outline-success" asp-controller="Home" asp-action="Index">Home</a>
+            </div>
+        }
+    </div>
+</div>
+<!-- Table End -->

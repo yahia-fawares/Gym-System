@@ -1,0 +1,151 @@
+﻿@model GymSystem2.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/views/shared/AdminLayout.cshtml";
+}
+
+<!-- عرض البيانات التي تم تمريرها في الـ ViewModel -->
+<div class="row g-4">
+    <div class="row g-4">
+        <div class="col-md-6 grid-margin transparent">
+            <div class="row">
+                <!-- Users Count Card -->
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                    <div class="card" style="background-color: #f36100; color: white;box-shadow: 0px 0px 10px white;font-weight:bold">
+                        <div class="card-body">
+                            <p class="mb-4">Users Count</p>
+                            <p class="fs-30 mb-2">@Model.UsersCount</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Plan Count Card -->
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                    <div class="card" style="background-color: #f36100; color: white; box-shadow: 0px 0px 10px white;font-weight:bold">
+                        <div class="card-body">
+                            <p class="mb-4">Plan Count</p>
+                            <p class="fs-30 mb-2">@Model.PlanCount</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="row">
+                 <!--Total Price-->
+            <div class="col-md-6 mb-4 stretch-card transparent">
+                    <div class="card" style="background-color: #f36100; color: white; box-shadow: 0px 0px 10px white;font-weight:bold">
+                        <div class="card-body">
+                            <p class="mb-4">Total Price</p>
+                            <p class="fs-30 mb-2">@Model.TotalPrice</p>
+                        </div>
+                    </div>
+                </div>
+             
+                <!-- Subscriptions Count Card -->
+                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                    <div class="card" style="background-color: #f36100; color: white; box-shadow: 0px 0px 10px white; font-weight:bold">
+                        <div class="card-body">
+                            <p class="mb-4">Subscriptions Count</p>
+                            <p class="fs-30 mb-2">@Model.SubscriptionsCount</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <h3>Monthly Subscriptions (Current Year)</h3>
+        <canvas id="monthlyChart" width="400" height="200"></canvas>
+
+        <h3>Annual Subscriptions</h3>
+        <canvas id="annualChart" width="400" height="200"></canvas>
+
+        <script>
+            try {
+                // بيانات الاشتراكات الشهرية
+                var monthlyData = JSON.parse('@Html.Raw(Model.MonthlyData)');
+                console.log("Monthly Data: ", monthlyData);
+
+                if (!monthlyData || monthlyData.length === 0) {
+                    console.error("No data found for monthly subscriptions.");
+                }
+
+                var monthlyLabels = monthlyData.map(d => d.Month);
+                var monthlyCounts = monthlyData.map(d => d.Count);
+
+                if (document.getElementById('monthlyChart')) {
+                    var monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+                    var monthlyChart = new Chart(monthlyCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: monthlyLabels.map(m => new Date(2000, m - 1, 1).toLocaleString('default', { month: 'long' })),
+                            datasets: [{
+                                label: 'Subscriptions',
+                                data: monthlyCounts,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: { display: false }
+                            },
+                            scales: {
+                                y: { beginAtZero: true }
+                            }
+                        }
+                    });
+                } else {
+                    console.error("monthlyChart canvas not found.");
+                }
+
+                // بيانات الاشتراكات السنوية
+                var annualData = JSON.parse('@Html.Raw(Model.AnnualData)');
+                console.log("Annual Data: ", annualData);
+
+                if (!annualData || annualData.length === 0) {
+                    console.error("No data found for annual subscriptions.");
+                }
+
+                var annualLabels = annualData.map(d => d.Year);
+                var annualCounts = annualData.map(d => d.Count);
+
+                if (document.getElementById('annualChart')) {
+                    var annualCtx = document.getElementById('annualChart').getContext('2d');
+                    var annualChart = new Chart(annualCtx, {
+                        type: 'line',
+                        data: {
+                            labels: annualLabels,
+                            datasets: [{
+                                label: 'Subscriptions',
+                                data: annualCounts,
+                                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                                borderColor: 'rgba(153, 102, 255, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: { display: true }
+                            },
+                            scales: {
+                                y: { beginAtZero: true }
+                            }
+                        }
+                    });
+                } else {
+                    console.error("annualChart canvas not found.");
+                }
+
+            } catch (error) {
+                console.error("An error occurred while generating the charts: ", error);
+            }
+        </script>
+
+
+      
+    </div>
+</div>
+

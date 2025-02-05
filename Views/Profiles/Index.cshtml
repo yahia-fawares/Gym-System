@@ -1,0 +1,55 @@
+﻿@model IEnumerable<GymSystem2.Models.Profile>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/views/shared/AdminLayout.cshtml";
+
+}
+
+<h1>Index</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageFile)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                    <img src=@Url.Content("~/Images/" + item.Imagepath)
+                         asp-append-version="true" style="border-radius:20%;"
+                         width="100" height="100" />
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Profileid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Profileid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Profileid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

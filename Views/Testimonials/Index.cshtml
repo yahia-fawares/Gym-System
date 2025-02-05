@@ -1,0 +1,56 @@
+﻿@model IEnumerable<GymSystem2.Models.Testimonial>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/views/shared/AdminLayout.cshtml";
+
+}
+
+<h1>Testimonial Status</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Profile.Fname)
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Profile.Fname)
+            </td>
+            <td>
+
+                    @if (item.IsApprove)
+                    {
+
+                        <a asp-controller="Admin" asp-action="Reject" asp-route-id="@item.Testimonialid" class="btn btn-danger">Reject</a>
+
+
+                    }
+                    else
+                    {
+                        <a asp-controller="Admin" asp-action="Approve" asp-route-id="@item.Testimonialid" class="btn btn-success">Approve</a>
+
+                    }
+
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

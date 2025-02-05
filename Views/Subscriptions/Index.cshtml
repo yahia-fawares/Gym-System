@@ -1,0 +1,53 @@
+﻿@model IEnumerable<GymSystem2.Models.Subscription>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/views/shared/AdminLayout.cshtml";
+
+}
+
+<h1>Index</h1>
+
+ 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fromdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Todate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plan)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fromdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Todate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.Profile.Fname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Plan.Planname)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Subscriptionid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Subscriptionid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Subscriptionid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

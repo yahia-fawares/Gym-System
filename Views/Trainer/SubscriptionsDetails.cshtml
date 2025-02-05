@@ -1,0 +1,44 @@
+﻿@model GymSystem2.Models.Subscription
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/views/shared/TrainerLayout.cshtml";
+
+}
+
+
+
+<div style="margin:20px">
+    <h2>Subscription Details</h2>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Fromdate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Fromdate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Todate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Todate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Member)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Member.Profile.Fname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plan)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plan.Planname)
+        </dd>
+    </dl>
+</div>
+<div style="margin:20px">
+    
+    <a asp-action="Subscriptions">Back to List</a>
+</div>

@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/MemberLayout.cshtml";
+}
+
+<h3 style="text-align: center; margin-top:15px; margin-bottom:2px">Your Subscription</h3>
+
+@if (ViewBag.Message != null)
+{
+    <p style="text-align: center; margin: 20px; color: red; font-weight: bold;">@ViewBag.Message</p>
+}
+else
+{
+    <div class="subscription-details" style="max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #191c24;">
+        <p><strong>Plan Name:</strong> @Model.Planname</p>
+        <p><strong>Description:</strong> @Model.Description</p>
+        <p><strong>Price:</strong> $@Model.Price</p>
+        <p><strong>Start Date:</strong> @Model.Fromdate.ToString("yyyy-MM-dd")</p>
+        <p><strong>End Date:</strong> @Model.Todate.ToString("yyyy-MM-dd")</p>
+
+        @if (Model.InvoicePath != null)
+        {
+            <p><a href="@Url.Content(Model.InvoicePath)" class="btn btn-success" target="_blank">Download Invoice</a></p>
+        }
+    </div>
+}
+
+<div style="text-align: center; margin-top: 20px;">
+    <a asp-action="MemberDashboard" class="btn btn-secondary">Back</a>
+</div>

@@ -1,0 +1,52 @@
+﻿@model GymSystem2.Models.Subscription
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/views/shared/AdminLayout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Subscription</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Subscriptionid" />
+
+            <div class="form-group">
+                <label asp-for="Fromdate" class="control-label"></label>
+                <input asp-for="Fromdate" type="date" class="form-control" />
+                <span asp-validation-for="Fromdate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Todate" class="control-label"></label>
+                <input asp-for="Todate" type="date" class="form-control" />
+                <span asp-validation-for="Todate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Memberid" class="control-label">Member Name</label>
+                <select asp-for="Memberid" class="form-control" asp-items="ViewBag.Memberid"></select>
+                <span asp-validation-for="Memberid" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Planid" class="control-label">Plan Name</label>
+                <select asp-for="Planid" class="form-control" asp-items="ViewBag.Planid"></select>
+                <span asp-validation-for="Planid" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

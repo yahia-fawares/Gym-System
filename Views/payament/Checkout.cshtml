@@ -1,0 +1,159 @@
+﻿@model GymSystem2.Models.Plan
+
+@{
+    Layout = null;
+}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f36100;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .checkout-card {
+        background: linear-gradient(145deg, #ffcc80, #ffb74d); /* ألوان برتقالية متدرجة */
+        border-radius: 12px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.7);
+        max-width: 400px;
+        width: 100%;
+        padding: 20px;
+        margin: 20px auto;
+        text-align: center;
+        color: #333;
+    }
+
+    .card-header h3 {
+        font-size: 1.5rem;
+        color: #ffffff;
+    }
+
+    .card-header p {
+        margin: 5px 0;
+        color: #ffffff;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    label {
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: #ffffff;
+    }
+
+    .card-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 6px rgba(255, 255, 255, 0.7);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #ff6f00; /* لون برتقالي داكن */
+        border: none;
+        color: white;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        width: 100%;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        padding: 10px;
+        border-radius: 8px;
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .alert {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 8px;
+        text-align: left;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .card-form {
+        margin-top: 20px; /* مسافة بين معلومات الخطة وحقول الإدخال */
+    }
+</style>
+
+<div class="checkout-card">
+    <div class="card-header">
+        <h3>@Model.Planname</h3>
+        <p class="plan-description">@Model.Description</p>
+        <p class="price">Price: $@Model.Price</p>
+        <p class="duration">Duration: 5 months</p>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <form asp-action="Checkout" method="post" class="card-form">
+        <!-- Card Number -->
+        <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" id="cardNumber" name="cardNumber" class="form-control card-input" placeholder="1234 5678 9012 3456" required />
+        </div>
+
+        <!-- Card Password -->
+        <div class="form-group">
+            <label for="cardPassword">Card Password</label>
+            <input type="password" id="cardPassword" name="cardPassword" class="form-control card-input" placeholder="••••••••" required />
+        </div>
+
+        <!-- Hidden Plan ID -->
+        <input type="hidden" name="planId" value="@Model.Planid" />
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-block">Pay Now</button>
+    </form>
+
+    <!-- Button to go back to Home Page -->
+    <a class="btn btn-outline-success mr-5" asp-controller="Home" asp-action="Index" >Home</a>
+
+</div>
+
+
